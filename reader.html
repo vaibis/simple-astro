@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>simple astro — reader</title>
+    <meta name="description" content="astronomy and astrophysics guides, following the IOAA syllabus.">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <div class="app">
+
+        <!-- ============ sidebar ============ -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-top">
+                <a class="brand" href="index.html">
+                    <svg class="brand-logo" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 1.5 L14.35 9.65 L22.5 12 L14.35 14.35 L12 22.5 L9.65 14.35 L1.5 12 L9.65 9.65 Z" />
+                    </svg>
+                    <span class="brand-word">simple astro</span>
+                </a>
+                <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">&times;</button>
+            </div>
+
+            <p class="sidebar-eyebrow">IOAA THEORY SYLLABUS</p>
+
+            <nav class="toc" id="toc"><!-- populated by script.js --></nav>
+
+            <div class="sidebar-foot">
+                <a href="https://usaaao.org/wp-content/uploads/2016/06/ioaa_syllabus.pdf" target="_blank" rel="noopener">
+                    full syllabus (pdf) ↗
+                </a>
+            </div>
+
+        </aside>
+
+        <div class="sidebar-scrim" id="sidebarScrim"></div>
+
+        <!-- ============ reader ============ -->
+        <main class="reader">
+
+            <header class="topbar">
+                <button class="menu-button" id="menuButton" aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+
+                <div class="topbar-heading">
+                    <p class="topbar-eyebrow" id="topbarEyebrow">SECTION 00</p>
+                    <h1 class="topbar-title" id="topbarTitle">About the Guide</h1>
+                </div>
+
+                <a class="download-button" id="downloadButton" download hidden>
+                    <span>download</span>
+                    <span class="download-arrow">↓</span>
+                </a>
+            </header>
+
+            <div class="reader-body" id="readerBody">
+
+                <!-- about panel -->
+                <section class="about-panel" id="aboutPanel">
+                    <p class="eyebrow">00 · ABOUT</p>
+                    <h2>What this is</h2>
+                    <p>
+                        <em>simple astro</em> is a set of handouts working through the
+                        International Olympiad on Astronomy and Astrophysics theory
+                        syllabus, one topic at a time — written to build intuition first,
+                        with the formalism arriving because it's needed, not before.
+                    </p>
+                    <p>
+                        The sidebar mirrors the syllabus's own structure: seven content
+                        sections, each broken into the same subtopics IOAA itself lists.
+                        Guides are added as they're written, so some entries are live and
+                        some are still blank pages — open one and you'll see which.
+                    </p>
+                    <h2>How to read them</h2>
+                    <p>
+                        Each guide assumes the prerequisite knowledge stated at its start
+                        and builds forward from there — Newton's laws and basic calculus
+                        are usually assumed; anything more specialized is derived, not
+                        assumed. They're meant to be read in order within a section, but
+                        every guide can also stand alone as reference.
+                    </p>
+                    <p class="about-footnote">
+                        Pick a section on the left to begin, or start at
+                        <strong>01 — Basic Astrophysics</strong>.
+                    </p>
+                </section>
+
+                <!-- pdf panel -->
+                <section class="pdf-panel" id="pdfPanel" hidden>
+                    <div class="pdf-status" id="pdfStatus"></div>
+                    <div class="pdf-pages" id="pdfPages"></div>
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
