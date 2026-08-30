@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>simple astro</title>
+    <meta name="description" content="a guide to astronomy and astrophysics.">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap');
+
+        :root {
+            --background: #05070b;
+            --foreground: rgba(255, 255, 255, 0.94);
+            --muted: rgba(255, 255, 255, 0.56);
+            --faint: rgba(255, 255, 255, 0.34);
+
+            --glass: rgba(12, 15, 22, 0.38);
+            --glass-border: rgba(255, 255, 255, 0.14);
+            --glass-highlight: rgba(255, 255, 255, 0.075);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+            margin: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100svh;
+
+            background: var(--background);
+            color: var(--foreground);
+
+            font-family: "Manrope", sans-serif;
+
+            overflow: hidden;
+        }
+
+        /* =========================================
+           background
+           ========================================= */
+
+        .background {
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+
+            background:
+                linear-gradient(
+                    rgba(3, 5, 9, 0.28),
+                    rgba(3, 5, 9, 0.52)
+                ),
+                url("assets/stars.jpg") center / cover no-repeat;
+
+            transform: scale(1.02);
+        }
+
+        /*
+         * subtle atmospheric glow over the stars
+         */
+        .background::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 45%,
+                    rgba(120, 140, 180, 0.08),
+                    transparent 38%
+                );
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           lander
+           ========================================= */
+
+        .lander {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 24px;
+        }
+
+        .lander-card {
+            width: min(720px, 100%);
+
+            padding: 72px 56px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            text-align: center;
+
+            background: var(--glass);
+
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, 0.42),
+                inset 0 1px 0 var(--glass-highlight);
+
+            backdrop-filter: blur(20px) saturate(120%);
+            -webkit-backdrop-filter: blur(20px) saturate(120%);
+
+            animation: card-in 900ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+        }
+
+
+        /* =========================================
+           geometric star
+           ========================================= */
+
+        .logo {
+            width: 30px;
+            height: 30px;
+
+            margin-bottom: 30px;
+
+            fill: rgba(255, 255, 255, 0.9);
+
+            filter:
+                drop-shadow(
+                    0 0 12px rgba(255, 255, 255, 0.18)
+                );
+        }
+
+
+        /* =========================================
+           typography
+           ========================================= */
+
+        .eyebrow {
+            margin: 0 0 18px;
+
+            color: var(--faint);
+
+            font-family: "DM Mono", monospace;
+            font-size: 0.65rem;
+            font-weight: 500;
+
+            letter-spacing: 0.18em;
+        }
+
+        h1 {
+            margin: 0;
+
+            color: var(--foreground);
+
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(3.4rem, 8vw, 6.8rem);
+            font-weight: 500;
+
+            line-height: 0.95;
+            letter-spacing: -0.055em;
+        }
+
+        .tagline {
+            margin: 24px 0 40px;
+
+            color: var(--muted);
+
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            font-weight: 400;
+
+            letter-spacing: 0.01em;
+        }
+
+
+        /* =========================================
+           enter button
+           ========================================= */
+
+        .enter-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+
+            min-width: 150px;
+
+            padding: 13px 20px 13px 23px;
+
+            color: var(--foreground);
+
+            font-family: "Manrope", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+
+            text-decoration: none;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 8px 30px rgba(0, 0, 0, 0.18);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+
+            transition:
+                background 220ms ease,
+                border-color 220ms ease,
+                transform 220ms ease,
+                box-shadow 220ms ease;
+        }
+
+        .enter-button:hover {
+            background: rgba(255, 255, 255, 0.12);
+
+            border-color: rgba(255, 255, 255, 0.28);
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                0 12px 40px rgba(0, 0, 0, 0.28);
+
+            transform: translateY(-2px);
+        }
+
+        .enter-button:active {
+            transform: translateY(0);
+        }
+
+        .arrow {
+            font-size: 1.05rem;
+
+            transition:
+                transform 220ms ease;
+        }
+
+        .enter-button:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .enter-button:focus-visible {
+            outline: 2px solid rgba(255, 255, 255, 0.7);
+            outline-offset: 4px;
+        }
+
+
+        /* =========================================
+           animation
+           ========================================= */
+
+        @keyframes card-in {
+            from {
+                opacity: 0;
+                transform: translateY(14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* =========================================
+           mobile
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .lander {
+                padding: 16px;
+            }
+
+            .lander-card {
+                padding: 56px 24px;
+
+                border-radius: 22px;
+            }
+
+            .logo {
+                width: 26px;
+                height: 26px;
+
+                margin-bottom: 24px;
+            }
+
+            .eyebrow {
+                font-size: 0.58rem;
+                letter-spacing: 0.14em;
+            }
+        }
+
+
+        /* =========================================
+           accessibility
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 1ms !important;
+                transition-duration: 1ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="background"></div>
+
+    <main class="lander">
+
+        <section class="lander-card">
+
+            <!-- geometric star -->
+            <svg
+                class="logo"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+                <path
+                    d="M12 1.5
+                       L14.35 9.65
+                       L22.5 12
+                       L14.35 14.35
+                       L12 22.5
+                       L9.65 14.35
+                       L1.5 12
+                       L9.65 9.65
+                       Z"
+                />
+            </svg>
+
+            <p class="eyebrow">
+                ASTRONOMY · ASTROPHYSICS
+            </p>
+
+            <h1>
+                simple astro
+            </h1>
+
+            <p class="tagline">
+                astronomy and astrophysics, made for every enthusiast.
+            </p>
+
+            <a
+                class="enter-button"
+                href="reader.html"
+            >
+                <span>enter</span>
+                <span class="arrow">→</span>
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
