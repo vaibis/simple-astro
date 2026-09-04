@@ -15,10 +15,12 @@ const SYLLABUS = [
         title: "Basic Astrophysics",
         topics: [
             { slug: "celestial-mechanics", title: "Celestial Mechanics" },
+            { slug: "orbital-geometry", title: "Orbital Geometry" },
             { slug: "electromagnetic-theory-quantum-physics", title: "EM Theory & Quantum Physics" },
             { slug: "thermodynamics", title: "Thermodynamics" },
             { slug: "spectroscopy-atomic-physics", title: "Spectroscopy & Atomic Physics" },
             { slug: "nuclear-physics", title: "Nuclear Physics" },
+            { slug: "relativity", title: "Relativity" },
         ],
     },
     {
@@ -80,6 +82,14 @@ const SYLLABUS = [
         topics: [
             { slug: "multi-wavelength-astronomy", title: "Multi-wavelength Astronomy" },
             { slug: "instrumentation", title: "Instrumentation" },
+        ],
+    },
+    {
+        id: "08",
+        slug: "mathematical-tools",
+        title: "Math Tools",
+        topics: [
+            { slug: "calculus", title: "Calculus" },
         ],
     },
 ];
