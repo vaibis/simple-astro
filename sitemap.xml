@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="https://www.xml-sitemaps.com/css/sitemap.css"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://vaibis.github.io/simple-astro/</loc>
+       <lastmod>2026-09-01T08:56:02+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://vaibis.github.io/simple-astro/reader.html</loc>
+       <lastmod>2026-09-01T08:56:02+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://vaibis.github.io/simple-astro/index.html</loc>
+       <lastmod>2026-09-01T08:56:02+00:00</lastmod>
+       <priority>0.6400</priority>
+  </url>
+</urlset>
